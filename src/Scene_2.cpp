@@ -124,25 +124,6 @@ void Scene_2::start()
 	m_speedFactor = glm::vec2(4.0f, 4.0f);
 
 
-// Back Button
-		m_pBackButton = new Button("../Assets/textures/back.png", "backButton", BACK_BUTTON);
-		m_pBackButton->getTransform()->position = glm::vec2(60.0f, 560.0f);
-		m_pBackButton->addEventListener(CLICK, [&]()-> void
-			{
-				m_pBackButton->setActive(false);
-				TheGame::Instance()->changeSceneState(START_SCENE);
-			});
-
-		m_pBackButton->addEventListener(MOUSE_OVER, [&]()->void
-			{
-				m_pBackButton->setAlpha(128);
-			});
-
-		m_pBackButton->addEventListener(MOUSE_OUT, [&]()->void
-			{
-				m_pBackButton->setAlpha(255);
-			});
-		addChild(m_pBackButton);
 
 		// Next Button
 		m_pNextButton = new Button("../Assets/textures/next.png", "nextButton", NEXT_BUTTON);

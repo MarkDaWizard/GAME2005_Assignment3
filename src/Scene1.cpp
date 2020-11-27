@@ -14,7 +14,6 @@
 Scene1::Scene1()
 {
 	Scene1::start();
-	
 }
 
 Scene1::~Scene1()
@@ -31,10 +30,7 @@ void Scene1::draw()
 	{
 		GUI_Function();
 		Util::DrawRect(m_pPlayer->getTransform()->position - glm::vec2(m_pPlayer->getWidth() * 0.5f, m_pPlayer->getHeight() * 0.5f), m_pPlayer->getWidth(), m_pPlayer->getHeight());
-		
-		
 	}
-	
 
 }
 
@@ -42,6 +38,7 @@ void Scene1::update()
 {
 	updateDisplayList();
 	
+	//Object pool update
 	if (m_pPool != NULL)
 	{
 		if (running)
@@ -62,7 +59,6 @@ void Scene1::update()
 			//std::vector<bool>::iterator myBoolIter = m_pPool->activeColliding.begin();
 			int i = 0;
 			for (std::vector<Bullet*>::iterator myiter = m_pPool->active.begin(); myiter != m_pPool->active.end(); myiter++)
-				//for (int i = 0; i < m_pPool->active.size(); i++)
 
 			{
 				Bullet* currentbullet = *myiter;
@@ -177,9 +173,13 @@ void Scene1::reset() {
 	m_PPM = 1.0f;
 	running = false;
 	m_pPlayer->SPEED = 100.0f;
+
+	//Player's position
 	m_pPlayer->getTransform()->position = glm::vec2(400.0f, 400.0f);
 	m_pPlayer->getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	m_pPlayer->getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
+
+	//Bullet stuffs
 	bulletSpawnTimerinSec = 0.5f;
 	bulletSpawnTimerDuration = bulletSpawnTimerinSec * 1000;
 	m_noOfBullet = 10;
@@ -207,26 +207,6 @@ void Scene1::start()
 		addChild(bullet);
 	}
 	
-	// Back Button
-	m_pBackButton = new Button("../Assets/textures/back.png", "backButton", BACK_BUTTON);
-	m_pBackButton->getTransform()->position = glm::vec2(150.0f, 560.0f);
-	m_pBackButton->addEventListener(CLICK, [&]()-> void
-	{
-		m_pBackButton->setActive(false);
-		TheGame::Instance()->changeSceneState(START_SCENE);
-	});
-
-	//Event when mousing over button
-	m_pBackButton->addEventListener(MOUSE_OVER, [&]()->void
-	{
-		m_pBackButton->setAlpha(128);
-	});
-
-	m_pBackButton->addEventListener(MOUSE_OUT, [&]()->void
-	{
-		m_pBackButton->setAlpha(255);
-	});
-	addChild(m_pBackButton);
 
 	// Next Button
 	m_pNextButton = new Button("../Assets/textures/next.png", "nextButton", NEXT_BUTTON);
@@ -271,7 +251,7 @@ void Scene1::start()
 	addChild(m_pVelocity);
 	
 	// Display spawn duration
-	m_pSpawnDuration = new Label("Spawn Duration: 0.5 s", "Consolas", 20, white);
+	m_pSpawnDuration = new Label("Duration: 0.5 s", "Consolas", 20, white);
 	m_pSpawnDuration->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.5f, 50.0f);
 	addChild(m_pSpawnDuration);
 	reset();
@@ -288,7 +268,7 @@ void Scene1::changeLabel()
 	text = "Bullets: " + std::to_string(m_noOfBullet) ;
 	m_pNumberOfBullet->setText(text);
 	
-	text = "Bullet Spawn Timer: " + std::to_string(bulletSpawnTimerinSec)+" s";
+	text = "Duration: " + std::to_string(bulletSpawnTimerinSec)+" s";
 	m_pSpawnDuration->setText(text);
 }
 
