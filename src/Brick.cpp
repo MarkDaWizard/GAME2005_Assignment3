@@ -1,6 +1,6 @@
 #include "Brick.h"
 #include "glm/gtx/string_cast.hpp"
-#include "PlayScene.h"
+#include "Scene1.h"
 #include "TextureManager.h"
 #include "Util.h"
 #include "CircleCollider.h"

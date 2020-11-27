@@ -84,7 +84,8 @@ void StartScene::start()
 		m_pScene1Button->setActive(false);
 		TheGame::Instance()->changeSceneState(PLAY_SCENE);
 	});
-	
+
+	//Change transparency when moused over
 	m_pScene1Button->addEventListener(MOUSE_OVER, [&]()->void
 	{
 		m_pScene1Button->setAlpha(200);
@@ -107,6 +108,7 @@ void StartScene::start()
 			TheGame::Instance()->changeSceneState(END_SCENE);
 		});
 
+	//Change transparency when moused over
 	m_pScene2Button->addEventListener(MOUSE_OVER, [&]()->void
 		{
 			m_pScene2Button->setAlpha(200);
