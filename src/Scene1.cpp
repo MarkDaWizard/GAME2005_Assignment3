@@ -86,9 +86,6 @@ void Scene1::update()
 				else
 					m_pPool->activeColliding[i] = false;
 
-				//bool collision=CollisionManager::AABBCheck1(currentbullet, m_pPlayer, m_pPool->activeColliding,i);
-				//m_pPool->activeColliding[i] = collision;
-
 				if (currentbullet->getTransform()->position.y >= 650)
 				{
 					m_pPool->Despawn(currentbullet);
@@ -169,7 +166,7 @@ void Scene1::handleEvents()
 }
 void Scene1::reset() {
 	
-	//Reset label parameter to default
+	//Reset label parameters to default
 	m_PPM = 1.0f;
 	running = false;
 	m_pPlayer->SPEED = 100.0f;
